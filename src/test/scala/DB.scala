@@ -1,4 +1,4 @@
-import com.ambiata.disorder.DistinctPair
+//import com.ambiata.disorder.DistinctPair
 import org.scalacheck._
 import org.scalacheck.Prop._
 
@@ -25,14 +25,14 @@ object DBTest extends Properties("DB") {
     } yield e =? None)
   }
 
-  property("insert non-empty unique") = forAll { (e1: Entity, e2a: Entity, names: DistinctPair[Int]) =>
-    val e2b = e2a.copy(name = names.second.toString)
-    run(for {
-      i1 <- EntityDB.insertUnique(e1.copy(name = names.first.toString))
-      i2 <- EntityDB.insertUnique(e2b)
-      e3 <- i2.map(EntityDB.get).getOrElse(DB.pure(Option.empty[Entity]))
-    } yield e3 =? Some(e2b))
-  }
+//  property("insert non-empty unique") = forAll { (e1: Entity, e2a: Entity, names: DistinctPair[Int]) =>
+//    val e2b = e2a.copy(name = names.second.toString)
+//    run(for {
+//      i1 <- EntityDB.insertUnique(e1.copy(name = names.first.toString))
+//      i2 <- EntityDB.insertUnique(e2b)
+//      e3 <- i2.map(EntityDB.get).getOrElse(DB.pure(Option.empty[Entity]))
+//    } yield e3 =? Some(e2b))
+//  }
 
   property("insert non-empty duplicate") = forAll { (e1: Entity, e2: Entity, name: String) =>
     run(for {
